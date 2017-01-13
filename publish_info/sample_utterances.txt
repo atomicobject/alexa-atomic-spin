@@ -3,21 +3,29 @@ getLatestSpinPost latest post
 getLatestSpinPost to read the latest post
 getLatestSpinPost for the latest post
 getLatestSpinPost today's post
-getLatestSpinPost to read the today's post
-getLatestSpinPost for the today's post
+getLatestSpinPost to read today's post
+getLatestSpinPost for today's post
+
+getLatestSpinPost the latest blog post
+getLatestSpinPost latest blog post
+getLatestSpinPost to read the latest blog post
+getLatestSpinPost for the latest blog post
+getLatestSpinPost today's blog post
+getLatestSpinPost to read today's blog post
+getLatestSpinPost for today's blog post
 
 getLatestSpinPost the latest spin post
 getLatestSpinPost latest spin post
 getLatestSpinPost to read the latest spin post
 getLatestSpinPost for the latest spin post
 getLatestSpinPost today's spin post
-getLatestSpinPost to read the today's spin post
-getLatestSpinPost for the today's spin post
+getLatestSpinPost to read today's spin post
+getLatestSpinPost for today's spin post
 
 getLatestSpinPost the latest atomic spin post
 getLatestSpinPost latest atomic spin post
 getLatestSpinPost to read the latest atomic spin post
 getLatestSpinPost for the latest atomic spin post
 getLatestSpinPost today's atomic spin post
-getLatestSpinPost to read the today's atomic spin post
-getLatestSpinPost for the today's atomic spin post
+getLatestSpinPost to read today's atomic spin post
+getLatestSpinPost for today's atomic spin post
