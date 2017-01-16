@@ -46,6 +46,7 @@ end
 
 # For Alexa
 post '/latest-post' do
+  puts "Received request with headers:\n#{request.env}"
   verification_success = settings.cert_verifier.verify!(
     request.env["HTTP_SIGNATURECERTCHAINURL"],
     request.env['HTTP_SIGNATURE'], 
