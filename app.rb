@@ -5,7 +5,7 @@ require 'uri'
 require 'rest-client'
 require 'nokogiri'
 require 'alexa_verifier'
-require 'pry'
+#require 'pry'
 
 module Spin
   SPIN_ROOT_URL = "https://spin.atomicobject.com/wp-json/"
