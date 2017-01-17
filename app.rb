@@ -5,7 +5,7 @@ require 'uri'
 require 'rest-client'
 require 'nokogiri'
 require 'alexa_verifier'
-#require 'pry'
+require 'pry'
 
 module Spin
   SPIN_ROOT_URL = "https://spin.atomicobject.com/wp-json/"
@@ -77,18 +77,18 @@ end
 PADDING_LEN = 25 # for the type: "SSML" and ssml: parts
 OPENING_TAG = "<speak>"
 CLOSING_TAG = "</speak>"
-MAX_RESPONSE_LEN = 7000 # Give extra characters for conversion to json
+MAX_RESPONSE_LEN = 8000 # Give extra characters for conversion to json
 
 def post_to_ssml(post)
   read_more_text = "The remainder of this post cannot be read due to it's length, however you can read the rest at spin.atomicobject.com!"
   result = OPENING_TAG
-  result << "#{post[:title]}<break strength=\"medium\"/> by #{post[:author]}<break time=\"1s\"/>"
+  result = OPENING_TAG + "#{post[:title]}<break strength=\"medium\"/> by #{post[:author]}<break time=\"1s\"/>"
   result = post[:body_sections].inject(result) do |memo, section|
     next_section = "#{section}<break time=\"1s\"/>"
-    if ((PADDING_LEN + memo.length + next_section.length + read_more_text.length + CLOSING_TAG.length) > MAX_RESPONSE_LEN)
-      puts "Truncating post"
-      break memo << read_more_text
-    end
+      if ((PADDING_LEN + memo.length + next_section.length + read_more_text.length + CLOSING_TAG.length) > MAX_RESPONSE_LEN)
+        puts "Truncating post"
+        break memo << read_more_text
+      end
     memo << next_section
     memo
   end
