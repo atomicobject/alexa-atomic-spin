@@ -44,6 +44,11 @@ configure do
   set :cert_verifier, verifier
 end
 
+before do
+  # Respond with json for all responses
+  content_type :json
+end
+
 # For Alexa
 post '/latest-post' do
   puts "Received request with headers:\n#{request.env}"
@@ -69,6 +74,7 @@ get '/latest-post' do
   make_ssml_response(ssml, card)
 end
 
+PADDING_LEN = 25 # for the type: "SSML" and ssml: parts
 OPENING_TAG = "<speak>"
 CLOSING_TAG = "</speak>"
 MAX_RESPONSE_LEN = 8000
@@ -79,12 +85,15 @@ def post_to_ssml(post)
   result << "#{post[:title]}<break strength=\"medium\"/> by #{post[:author]}<break time=\"1s\"/>"
   result = post[:body_sections].inject(result) do |memo, section|
     next_section = "#{section}<break time=\"1s\"/>"
-    if ((memo.length + next_section.length + read_more_text.length + CLOSING_TAG.length) > MAX_RESPONSE_LEN)
+    if ((PADDING_LEN + memo.length + next_section.length + read_more_text.length + CLOSING_TAG.length) > MAX_RESPONSE_LEN)
       break memo << read_more_text
     end
     memo << next_section
+    memo
   end
   result << CLOSING_TAG
+  puts "Result json length: #{result.to_json.length}" 
+  result
 end
 
 def response_card_for_post(post)
