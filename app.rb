@@ -5,14 +5,20 @@ require 'uri'
 require 'rest-client'
 require 'nokogiri'
 require 'alexa_verifier'
-#require 'pry'
+
+if development?
+  require 'pry'
+end
 
 module Spin
   SPIN_ROOT_URL = "https://spin.atomicobject.com/wp-json/"
 
   def self.readable_content(content)
     # Convert html to plain text and then split by newlines so pauses can be added
-    Nokogiri::HTML(content).text.split("\n")
+    html = Nokogiri::HTML(content)
+    # Remove code snippets
+    html.css("pre code").each{|p| p.swap(" Code Snippet. ")}
+    html.text.split("\n")
   end
 
   def self.prepare_post_for_reading(post_json)
