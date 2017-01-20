@@ -18,7 +18,9 @@ module Spin
     html = Nokogiri::HTML(content)
     # Remove code snippets
     html.css("pre code").each{|p| p.swap(" Code Snippet. ")}
-    html.text.split("\n")
+    # Squish multiple new lines into one
+    text = html.text.gsub!(/[\n]+/, "\n");
+    text.split("\n")
   end
 
   def self.prepare_post_for_reading(post_json)
