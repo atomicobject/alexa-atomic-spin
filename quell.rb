@@ -7,8 +7,8 @@ class RatePainSession
 
   def text_to_ssml(text)
     result = OPENING_TAG
-    result << text
-    result << CLOSING_TAG
+    result = result + text
+    result = result + CLOSING_TAG
   end
 
 end
