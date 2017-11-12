@@ -5,6 +5,7 @@ require 'uri'
 require 'rest-client'
 require 'nokogiri'
 require 'alexa_verifier'
+require './quell.rb'
 
 if development?
   require 'pry'
@@ -73,6 +74,7 @@ post '/latest-post' do
   make_ssml_response(ssml, card)
 end
 
+
 # For debugging
 get '/latest-post' do
   puts "REQUEST BODY: #{request.body}"
@@ -81,6 +83,21 @@ get '/latest-post' do
   card = response_card_for_post(post)
   make_ssml_response(ssml, card)
 end
+
+post '/rate-pain' do
+  rate_pain_session = RatePainSession.new
+  resp_text = rate_pain_session.rate_pain
+  make_ssml_response resp_text
+end
+
+# For debugging
+get '/rate-pain' do
+  puts "REQUEST BODY: #{request.body}"
+  rate_pain_session = RatePainSession.new
+  resp_text = rate_pain_session.rate_pain
+  make_ssml_response resp_text
+end
+
 
 PADDING_LEN = 25 # for the type: "SSML" and ssml: parts
 OPENING_TAG = "<speak>"
@@ -113,7 +130,7 @@ def response_card_for_post(post)
   }
 end
 
-def make_ssml_response(text, card)
+def make_ssml_response(text, card=nil)
   r = {
     "version" => "1.0",
     "sessionAttributes" => { },
