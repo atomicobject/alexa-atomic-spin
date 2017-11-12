@@ -85,7 +85,9 @@ get '/latest-post' do
 end
 
 post '/rate-pain' do
-  puts "Received request with headers:\n#{request.env}"
+  req_body = request.body.read
+  puts "REQUEST BODY: #{req_body}"
+
   rate_pain_session = RatePainSession.new
   resp_text = rate_pain_session.rate_pain
   make_ssml_response resp_text, false
