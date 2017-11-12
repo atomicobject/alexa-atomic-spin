@@ -85,9 +85,10 @@ get '/latest-post' do
 end
 
 post '/rate-pain' do
+  puts "REQUEST BODY: #{request.body}"
   rate_pain_session = RatePainSession.new
   resp_text = rate_pain_session.rate_pain
-  make_ssml_response resp_text
+  make_ssml_response resp_text, false
 end
 
 # For debugging
@@ -95,7 +96,7 @@ get '/rate-pain' do
   puts "REQUEST BODY: #{request.body}"
   rate_pain_session = RatePainSession.new
   resp_text = rate_pain_session.rate_pain
-  make_ssml_response resp_text
+  make_ssml_response resp_text, false
 end
 
 
@@ -130,7 +131,7 @@ def response_card_for_post(post)
   }
 end
 
-def make_ssml_response(text, card=nil)
+def make_ssml_response(text, end_session=true, card=nil)
   r = {
     "version" => "1.0",
     "sessionAttributes" => { },
@@ -139,7 +140,7 @@ def make_ssml_response(text, card=nil)
         "type" => "SSML",
         "ssml" => text
       },
-      "shouldEndSession" => true
+        "shouldEndSession" => end_session
     }
   }
   r["response"]["card"] = card if card
