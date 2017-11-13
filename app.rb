@@ -90,9 +90,8 @@ post '/rate-pain' do
   req_params = JSON.parse req_body
 
   session = RatePain.get_session req_params
-  
   resp_text = RatePainIntents.handle_intent session, req_params
-  make_ssml_response resp_text, false
+  make_ssml_response resp_text, session.is_finished?
 end
 
 # For debugging

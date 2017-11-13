@@ -62,6 +62,9 @@ class RatePainSession
     ]
   end
 
+  def is_finished?
+    current_step().nil?
+  end
 
   def current_step
     @ratings.find {|r| r[:answer].nil? }
