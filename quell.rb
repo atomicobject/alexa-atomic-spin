@@ -51,13 +51,13 @@ class RatePainSession
         prompt: "On a scale of one to ten, how would you rate your pain over the last 24 hours?"
       },
       {
-        prompt: "How much has pain interfered with your sleep over the past 24 hours?"
+        prompt: "How much has pain <break time='1ms'/> affected your sleep <break time='1ms'/> over the last 24 hours?"
       },
       {
-        prompt: "How much has pain interfered with your activity level over the past 24 hours?"
+        prompt: "How much has pain <break time='1ms'/> affected your activity level <break time='1ms'/> over the last 24 hours?"
       },
       {
-        prompt: "How much has pain interfered with your mood over the past 24 hours?"
+        prompt: "How much has pain <break time='1ms'/> affected your mood <break time='1ms'/> over the last 24 hours?"
       }
     ]
   end
